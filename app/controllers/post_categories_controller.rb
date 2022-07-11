@@ -1,0 +1,3 @@
+class PostCategoriesController < ApplicationController
+    
+end
