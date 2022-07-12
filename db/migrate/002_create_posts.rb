@@ -6,6 +6,8 @@ class CreatePosts < ActiveRecord::Migration[5.2]
         t.boolean :phone_calls
         t.boolean :phone_texts
         t.boolean :show_email
+        t.integer :user_id
+        t.integer :location_id
 
         t.timestamps null: false
         end
