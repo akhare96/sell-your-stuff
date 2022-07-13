@@ -4,4 +4,5 @@ class Post < ActiveRecord::Base
     has_many :favorites
     has_many :post_categories
     has_many :categories, through: :post_categories
+    validates :show_phone, :phone_calls, :phone_texts, :show_email, presence: true
 end
