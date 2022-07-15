@@ -1,0 +1,11 @@
+<% if @user.errors.any? %>
+    <h3>
+        <%= pluralize(@user.errors.count, "error") %>
+        preventing this post from being saved:
+    </h3>
+    <ol>
+        <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ol>
+<% end %>
