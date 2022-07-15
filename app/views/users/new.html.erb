@@ -1,5 +1,17 @@
 <p> Create your account below: </p>
 
+<% if @user.errors.any? %>
+    <h3>
+        <%= pluralize(@user.errors.count, "error") %>
+        preventing this post from being saved:
+    </h3>
+    <ol>
+        <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ol>
+<% end %>
+
 <%= form_for @user do |f| %>
     
     <%= f.label :username %><br>
