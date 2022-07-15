@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 
+  def new
+  end
+
   def create
     if !auth.empty?
       github_username = auth['info']['nickname']
@@ -22,6 +25,11 @@ class SessionsController < ApplicationController
         flash[:failure] = "failed to log in"
       end
     end
+  end
+
+  def destroy
+    session.delete :user_id
+    redirect_to root_path
   end
 
   private
