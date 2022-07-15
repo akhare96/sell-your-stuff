@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if !auth.empty?
+    if !auth.nil?
       github_username = auth['info']['nickname']
       github_email = auth['info']['email']
       @user = User.find_or_create_by(username: github_username) do |u|
@@ -12,17 +12,18 @@ class SessionsController < ApplicationController
         u.email = github_email
         u.password = SecureRandom.hex
       end
-      session[:user_id] = @user.id
+      set_session(@user)
       flash[:success] = "Successfully logged in"
-      #redirect_to posts_path
+      redirect_to posts_path
     else 
       @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password])
-        session[:user_id] = @user.id
+        set_session(@user)
         flash[:success] = "Successfully logged in"
-        #redirect to posts_path
+        redirect_to posts_path
       else
-        flash[:failure] = "failed to log in"
+        flash[:failure] = "Failed to log in. Please check your credentials."
+        redirect_to login_path
       end
     end
   end
