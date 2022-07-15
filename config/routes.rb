@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   root 'application#homepage'
 
-  resources :users, only: [:new, :create, :show, :edit, :update] do
+  resources :users, only: [:create, :show, :edit, :update] do
     resources :posts, only: [:show, :index]
     resources :favorites, only: [:index]
   end
