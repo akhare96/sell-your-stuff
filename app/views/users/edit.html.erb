@@ -1,0 +1,14 @@
+<p>Edit for <%=current_user.username%></p>
+
+<%= render 'shared/errors' %>
+
+<%= form_for current_user do |f| %>
+    <%= f.label :username %><br>
+    <%= f.text_field :username, :value => current_user.username ,:readonly => true %>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+    <br><br>
+    <%= f.label :phone_number %><br>
+    <%= f.text_field :phone_number %>
+    <br><br>
+<%= f.submit "Update" %>
