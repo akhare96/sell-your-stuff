@@ -25,6 +25,18 @@ class UsersController < ApplicationController
         end
     end
 
+    def update
+        if verify_correct_user
+            if current_user.update(user_params)
+                redirect_to posts_path
+            else
+                render :edit
+            end
+        else
+            redirect_to posts_path
+        end
+    end
+    
 
     private
 
