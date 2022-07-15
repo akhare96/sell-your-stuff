@@ -11,6 +11,11 @@ module SellYourStuffApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    #line below prevents .error_with_fields class from changing the layout if errors are present
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      html_tag
+    }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
