@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>SellYourStuffApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,6 +11,14 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+
+  <header>
+    <% if logged_in? %>
+      <%= render 'layouts/logged_in_nav' %>
+    <% else %>
+      <%= render 'layouts/logged_out_nav' %>
+    <% end %>
+  </header>
 
   <body>
 
@@ -31,6 +40,6 @@
 
     <%= yield %>
 
-
   </body>
+
 </html>
