@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     before_action :verify_logged_in, only: [:edit, :update]
+    before_action :verify_user_can_edit, only: [:edit, :update]
     
     def new
         @user = User.new
@@ -18,30 +19,22 @@ class UsersController < ApplicationController
     end
 
     def edit
-        if verify_correct_user
-            @user = User.find(params[:id])
-        else
-            redirect_to posts_path
-        end
+        @user = User.find(params[:id])
     end
 
     def update
-        if verify_correct_user
-            if current_user.update(user_params)
-                redirect_to posts_path
-            else
-                render :edit
-            end
-        else
+        if current_user.update(user_params)
             redirect_to posts_path
+        else
+            render :edit
         end
     end
     
 
     private
 
-    def verify_correct_user
-        current_user.id == User.find(params[:id])
+    def verify_user_can_edit
+        redirect_to posts_path unless current_user.id == User.find(params[:id])
     end
 
     def user_params
