@@ -1,0 +1,23 @@
+<br><br><br>
+<div class="card text-center">
+  <div class="card-header">
+  </div>
+  <div class="card-body">
+    <h2 class="card-title">Welcome to Sell-Your-Stuff!</h5><br><br>
+    <h5 class="card-text"><a href="<%=login_path%>" style="text-decoration: none;">Log In</a></h5>
+    <h5 class="card-text"><a href="<%=signup_path%>" style="text-decoration: none;">Sign Up</a></h5>
+    <h5 class="card-text"><a href="<%=posts_path%>" style="text-decoration: none;">Continue as Guest</a></h5>
+    <br>
+    <h6> or </h6>
+    <form action='/auth/github' method='post'>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <button type="submit" class="btn btn-primary">Log in with GitHub</button>
+    </form>
+  </div>
+  <div class="card-footer text-muted">
+  </div>
+</div>
+
+<!--
+#<%= link_to('Log in with GitHub!', '/auth/github', method: :post) %>
+-->
