@@ -12,7 +12,7 @@ class UsersController < ApplicationController
             flash[:valid_new] = "Account successfully created"
             redirect_to posts_path
         else
-            flash[:invalid_new] = "Failed to create a new account"
+            flash.now[:invalid_new] = "Failed to create a new account"
             render :new
         end
     end
