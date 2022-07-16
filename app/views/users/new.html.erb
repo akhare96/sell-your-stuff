@@ -1,24 +1,29 @@
-<p> Create your account below: </p>
-
 <%= render 'shared/errors' %>
-
-<%= form_for @user do |f| %>
-    
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-    <br><br>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-    <br><br>
-    <%= f.label :phone_number %><br>
-    <%= f.text_field :phone_number %>
-    <br><br>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-    <br><br>
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-    <br><br>
-    <%= f.submit "create" %>
-
-<% end %>
+<br><br><br>
+<div class="card text-center">
+  <div class="card-header">
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">Create your account below</h3><br><br>
+    <%= form_for @user do |f| %>
+        <%= f.label :username %><br>
+        <%= f.text_field :username %>
+        <br><br>
+        <%= f.label :email %><br>
+        <%= f.text_field :email %>
+        <br><br>
+        <%= f.label :phone_number %><br>
+        <%= f.text_field :phone_number %>
+        <br><br>
+        <%= f.label :password %><br>
+        <%= f.password_field :password %>
+        <br><br>
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation %>
+        <br><br>
+        <%= f.submit "create" %>
+    <% end %>
+  </div>
+  <div class="card-footer text-muted">
+  </div>
+</div>
