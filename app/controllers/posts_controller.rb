@@ -2,6 +2,27 @@ class PostsController < ApplicationController
     before_action :verify_logged_in, only: [:new, :create, :edit, :update]
     before_action :verify_user_owns_post, only: [:edit, :update]
 
+    def index
+        @post = Post.all
+    end
+    
+    def new
+        @post = Post.new
+        #another way: @post.build_location(city: "", state: "")
+    end
+
+    def create
+        @post = Post.new(post_params)
+        @post.user = current_user
+        if @post.save
+            flash[:valid_post] = "Successfully created post"
+            redirect_to post_path(@post)
+        else
+            flash.now[:invalid_post] = "Post not saved"
+            render :new
+        end
+    end
+
 
     private
 
