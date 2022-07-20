@@ -1,14 +1,13 @@
-<p>Edit for <%=current_user.username%></p>
+<p>Edit for <%=@user.username%></p>
 
-<%= render 'shared/errors' %>
+<%=render partial: "shared/errors", locals: {user_post_errors: @user} %>
 
-<%= form_for current_user do |f| %>
-    <%= f.label :username %><br>
-    <%= f.text_field :username, :value => current_user.username ,:readonly => true %>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-    <br><br>
-    <%= f.label :phone_number %><br>
-    <%= f.text_field :phone_number %>
-    <br><br>
+<%= form_for @user do |f| %>
+
+    <%= render partial: "form", locals: {field: f}%>
+    
+    <%= render partial: "shared/location", locals: {field: f, user_post: @user}%>
+
 <%= f.submit "Update" %>
+
+<% end %>
