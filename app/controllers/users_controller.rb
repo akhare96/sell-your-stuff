@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     before_action :verify_user_can_edit, only: [:edit, :update]
     
     def new
+        redirect_to posts_path if logged_in?
         @user = User.new
     end
 
@@ -34,11 +35,11 @@ class UsersController < ApplicationController
     private
 
     def verify_user_can_edit
-        redirect_to posts_path unless current_user.id == User.find(params[:id])
+        redirect_to posts_path unless current_user == User.find(params[:id])
     end
 
     def user_params
-        params.require(:user).permit(:username, :email, :phone_number, :password, :password_confirmation)
+        params.require(:user).permit(:username, :email, :phone_number, :password, :password_confirmation, location_attributes: [:state, :city])
     end
 
 end
