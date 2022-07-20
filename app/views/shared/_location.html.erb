@@ -1,0 +1,11 @@
+<%= field.fields_for :location, (user_post.location_id == nil ? user_post.build_location : user_post.location) do |area| %>
+
+    <%= area.label :state %><br>
+      <%= area.collection_select :state, Post.states, :to_s, :to_s, include_blank: user_post.location.state ? user_post.location.state : true%>
+    <br><br>
+
+    <%= area.label :city %><br>
+      <%= area.collection_select :city, Post.cities, :to_s, :to_s, include_blank: user_post.location.city ? user_post.location.city : true%>
+    <br><br>
+
+<% end %>
