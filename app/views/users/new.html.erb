@@ -1,27 +1,29 @@
-<%= render 'shared/errors' %>
+<%=render partial: "shared/errors", locals: {user_post_errors: @user} %>
+
 <br><br><br>
+
 <div class="card text-center">
   <div class="card-header">
   </div>
   <div class="card-body">
     <h3 class="card-title">Create your account below</h3><br><br>
+
     <%= form_for @user do |f| %>
-        <%= f.label :username %><br>
-        <%= f.text_field :username %>
-        <br><br>
-        <%= f.label :email %><br>
-        <%= f.text_field :email %>
-        <br><br>
-        <%= f.label :phone_number %><br>
-        <%= f.text_field :phone_number %>
-        <br><br>
-        <%= f.label :password %><br>
-        <%= f.password_field :password %>
-        <br><br>
-        <%= f.label :password_confirmation %><br>
-        <%= f.password_field :password_confirmation %>
-        <br><br>
+
+      <%= render partial: "form", locals: {field: f}%>
+
+      <%= render partial: "shared/location", locals: {field: f, user_post: @user}%>
+
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+      <br><br>
+
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+      <br><br>
+
         <%= f.submit "create" %>
+
     <% end %>
   </div>
   <div class="card-footer text-muted">
