@@ -19,5 +19,16 @@ class Post < ActiveRecord::Base
         end
         states_array
     end
+
+    def self.cities
+        states = CS.states(:us)
+        cities = []
+        keys = []
+        states.each.collect do |key, value|
+            state_key = key.to_s
+            cities << CS.cities(state_key, "US")
+        end
+        cities.reduce(:concat).uniq.sort
+    end
    
 end
