@@ -35,6 +35,20 @@
   </div>
 
   <div class="col">
+    <%= f.label :condition %><br>
+    <%= f.collection_select :condition, Post.conditions, :to_s, :to_s, include_blank: true%>
+    <br><br>
+  </div>
+
+  <div class="col">
+  <div "form-check">
+    <%= f.label :categories %><br>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+    <br><br>
+    </div>
+  </div>
+
+  <div class="col">
     <%= f.label :quantity %><br>
     <%= f.number_field :quantity, step: 1.0 %>
     <br><br>
