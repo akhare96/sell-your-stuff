@@ -1,0 +1,6 @@
+<br>
+<p> Edit post for product: <%=@post.name%> </p>
+
+<%=render partial: "shared/errors", locals: {user_post_errors: @post} %>
+
+<%= render partial: "form" %>
