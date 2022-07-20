@@ -1,0 +1,59 @@
+<br><br><br>
+<%= form_for @post do |f| %>
+
+  <div class="container">
+  <div class="row row-cols-2">
+
+  <div class="col">
+    <%= f.label 'Product Name' %><br>
+    <%= f.text_field :name %>
+    <br><br>
+  </div>
+
+  <div class="col">
+    <%= f.label :price %><br>
+    <%= f.number_field :price, step: 1.0 %>
+    <br><br>
+  </div>
+
+  <div class="col">
+    <%= f.label 'Make and/or Manufacturer' %><br>
+    <%= f.text_field :make_manufacturer %>
+    <br><br>
+  </div>
+
+  <div class="col">
+    <%= f.label 'Model Name and/or Number' %><br>
+    <%= f.text_field :model_number %>
+    <br><br>
+  </div>
+
+  <div class="col">
+    <%= f.label 'Size/Dimesions' %><br>
+    <%= f.text_field :size_dimensions %>
+    <br><br>
+  </div>
+
+  <div class="col">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :quantity, step: 1.0 %>
+    <br><br>
+  </div>
+
+  <div class="col">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, size: "70x5" %>
+    <br><br><br>
+  </div>
+
+  <div class="col">
+    <%= render partial: "shared/location", locals: {field: f, user_post: @post}%>
+  </div>
+
+</div>
+</div>
+
+    <%= f.submit "create" %>
+
+<% end %>
+<br><br><br><br>
