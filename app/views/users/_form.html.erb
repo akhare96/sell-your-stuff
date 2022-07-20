@@ -1,0 +1,11 @@
+<%= field.label :username %><br>
+<%= field.text_field :username, :value => @user.username, :readonly => (true unless @user.username.nil?) %>
+<br><br>
+
+<%= field.label :email %><br>
+<%= field.text_field :email %>
+<br><br>
+
+<%= field.label :phone_number %><br>
+<%= field.text_field :phone_number %>
+<br><br>
