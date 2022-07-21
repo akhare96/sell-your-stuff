@@ -11,6 +11,9 @@ module SellYourStuffApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    #this line helps prevent complete image replacement when adding more images.  It adds to the active storage images.
+    config.active_storage.replace_on_assign_to_many = false
+
     #line below prevents .error_with_fields class from changing the layout if errors are present
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
       html_tag

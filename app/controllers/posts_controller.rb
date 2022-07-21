@@ -11,6 +11,10 @@ class PostsController < ApplicationController
         #another way: @post.build_location(city: "", state: "")
     end
 
+    def show
+        @post = Post.find(params[:id])
+    end
+
     def create
         @post = Post.new(post_params)
         @post.user = current_user
@@ -42,6 +46,12 @@ class PostsController < ApplicationController
         redirect_to posts_path
     end
 
+    def purge_image
+        image = ActiveStorage::Attachment.find(params[:id])
+        image.purge
+        redirect_back fallback_location: root_path, notice: "success"
+    end
+
     private
 
     def verify_user_owns_post
@@ -49,6 +59,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-        params.require(:post).permit(:name, :price, :description, :make_manufacturer, :model_number, :size_dimensions, :condition, :quantity, :show_phone, :phone_calls, :phone_texts, :show_email, location_attributes: [:state, :city], category_ids:[])
+        params.require(:post).permit(:name, :price, :description, :make_manufacturer, :model_number, :size_dimensions, :condition, :quantity, :show_phone, :phone_calls, :phone_texts, :show_email, location_attributes: [:state, :city], category_ids:[], images: [])
     end
 end
