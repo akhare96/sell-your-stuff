@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
     belongs_to :user
+    has_many_attached :images
     belongs_to :location
     has_many :favorites
     has_many :post_categories
