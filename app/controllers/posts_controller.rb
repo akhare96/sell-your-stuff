@@ -33,6 +33,10 @@ class PostsController < ApplicationController
 
     def update
         @post = Post.find(params[:id])
+        params[:show_email] ? @post.show_email = true : @post.show_email = false
+        params[:show_phone] ? @post.show_phone = true : @post.show_phone = false
+        params[:phone_texts] ? @post.phone_texts = true : @post.phone_texts = false
+        params[:phone_calls] ? @post.phone_calls = true : @post.phone_calls = false
         if @post.update(post_params)
             redirect_to post_path(@post)
         else
