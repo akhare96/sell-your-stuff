@@ -17,6 +17,10 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
+        params[:show_email] ? @post.show_email = true : @post.show_email = false
+        params[:show_phone] ? @post.show_phone = true : @post.show_phone = false
+        params[:phone_texts] ? @post.phone_texts = true : @post.phone_texts = false
+        params[:phone_calls] ? @post.phone_calls = true : @post.phone_calls = false
         @post.user = current_user
         if @post.save
             flash[:valid_post] = "Successfully created post"
