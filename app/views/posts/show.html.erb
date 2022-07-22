@@ -14,4 +14,76 @@
             </div>
         <% end %>
     <% end %>
-</div>
+    <br><br><br>
+    
+   
+    <div class="row row-cols-1">
+        <span class="border border-primary">
+            <div class="col">
+                <b>Description: </b><br><%= @post.description %><br>
+                <br>
+            </div>
+        </span>
+    </div>
+
+    <div class="row row-cols-2">
+        <span class="border border-primary">
+            <div class="col">
+                <b>Price: </b><br><%= "$ #{@post.price}" %><br>
+                <br>
+            </div>
+        </span>
+
+        <span class="border border-primary">
+            <div class="col">
+                <b>Location: </b><br><%= "#{@post.location.city}, #{@post.location.state}" %><br>
+                <br>
+            </div>
+        </span>
+
+        <span class="border border-primary">
+            <div class="col">
+                <b>Condition: </b><br><%= "$ #{@post.condition}" %><br>
+                <br>
+            </div>
+        </span>
+
+        <span class="border border-primary">
+            <div class="col">
+                <b>Make and/or Manufacturer: </b><br><%= @post.make_manufacturer %><br>
+                <br>
+            </div>
+        </span>
+
+        <span class="border border-primary">
+            <div class="col">
+                <b>Quantity: </b><br><%= @post.quantity %><br>
+                <br>
+            </div>
+        </span>
+
+        <span class="border border-primary">
+            <div class="col">
+                <b>Size/dimesions: </b><br><%= @post.size_dimensions %><br>
+                <br>
+            </div>
+        </span>
+
+        <span class="border border-primary">
+            <div class="col">
+                <b>Categories: </b><br>
+                <% @post.categories.each do |category| %>
+                    <%= category.name %><br>
+                <% end %>
+                <br>
+            </div>
+        </span>
+
+        <span class="border border-primary">
+            <div class="col">
+                <b>Model name and/or number: </b><br><%= @post.model_number %><br>
+                <br>
+            </div>
+        </span>
+    </div>
+  </div>
