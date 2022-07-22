@@ -1,8 +1,21 @@
 nav div ul li a {
     border-bottom: 2px solid white;
+    font-size: 1.1rem
 }
 
 nav div ul li a:hover {
     color: #000;
     border-bottom: 2px solid #000;
 }
+
+nav div span a {
+    color: white;
+}
+
+nav div span a:hover {
+    color: white;
+}
+
+.inline-block {
+    display: inline-block;
+ }
