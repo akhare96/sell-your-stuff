@@ -10,10 +10,10 @@
             </tr>
         </thead>
         <tbody>
-            <% @post.each do |post| %>
+            <% @posts.each do |post| %>
             <tr>
                 <td><%=date_created(post)%></td>
-                <td><%=link_to "#{post.name} - (#{post.location.city}, #{post.location.state})", post_path(post)%></td>
+                <td><%=link_to "#{post.name} - (#{post.location.city}, #{post.location.state})", user_post_path(post.user.id, post.id)%></td>
                 <td><%="$ #{post.price}"%></td>
             </tr>
             <%end %>
