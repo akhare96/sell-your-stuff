@@ -2,9 +2,16 @@
 <b><p class="fs-2 text-center"> <%=@user.username + "'s"%> profile </p></b><br><br>
 
 <div class="container fs-5">
-    <b>Username: </b><br><%= @user.username %><br><br>
-    <b>Email: </b><br><%= @user.email %><br><br>
-    <b>Phone: </b><br><%= @user.phone_number %><br><br>
+    <% if @user.email.empty? %>
+        <b> No email set </b><br><br>
+    <% else %>
+        <b>Email: </b><br><%= (@user.email) %><br><br>
+    <%end%>
+    <% if @user.phone_number.empty? %>
+        <b> No phone number set </b><br><br>
+    <% else %>
+        <b>Phone: </b><br><%= @user.phone_number %><br><br>
+    <%end%>
     <% if !@user.location %>
         <b> No location set </b><br><br>
     <% else %>
