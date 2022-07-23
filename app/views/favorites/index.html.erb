@@ -1,0 +1,25 @@
+<b><p class="fs-2 text-center"> Your Favorited Post(s) </p></b><br><br>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date Posted</th>
+                <th>Item Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @favorites.each do |favorite| %>
+            <tr>
+                <td><%=date_created(favorite.post)%></td>
+                <td><%=link_to "#{favorite.post.name} - (#{favorite.post.location.city}, #{favorite.post.location.state})", user_post_path(favorite.post.id, favorite.post.id)%></td>
+                <td><%="$ #{favorite.post.price}"%></td>
+            </tr>
+            <%end %>
+        </tbody>
+    </table>
+</div>
+<br><br><br><br><br>
+
+
