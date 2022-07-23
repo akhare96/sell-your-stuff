@@ -17,11 +17,15 @@ class FavoritesController < ApplicationController
         redirect_back fallback_location: root_path
     end
 
-
+    
     private
 
     def user_owns_favorites
         redirect_to posts_path unless current_user == User.find(params[:user_id])
+    end
+
+    def favorite_params
+        params.require(:favorite).permit(:post_id)
     end
 
 end
