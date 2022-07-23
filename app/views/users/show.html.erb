@@ -13,3 +13,32 @@
     <%= link_to "Edit Account", edit_user_path(@user), class:"btn btn-primary", method:"GET" %>
 </div>
 
+<br><br>
+
+<b><p class="fs-2 text-center"> Your Post(s) </p></b><br><br>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Delete/Edit</th>
+                <th>Date Posted</th>
+                <th>Item Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% current_user.posts.each do |post| %>
+            <tr>
+                <td><%= link_to "Delete", delete_post_path(post), class:"btn btn-primary btn-sm", method:"DELETE" %>
+                or <%= link_to "Edit", edit_post_path(post), class:"btn btn-primary btn-sm", method:"GET" %></td>
+                <td><%=date_created(post)%></td>
+                <td><%=link_to "#{post.name} - (#{post.location.city}, #{post.location.state})", user_post_path(post.user.id, post.id)%></td>
+                <td><%="$ #{post.price}"%></td>
+            </tr>
+            <%end %>
+        </tbody>
+    </table>
+</div>
+<br><br><br><br><br>
+
