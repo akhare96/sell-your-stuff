@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
-    before_action :verify_logged_in, only: [:edit, :update]
-    before_action :verify_user_can_edit, only: [:edit, :update]
+    before_action :verify_logged_in, only: [:show, :edit, :update]
+    before_action :verify_user_can_view, only: [:show, :edit, :update]
     
     def new
         redirect_to posts_path if logged_in?
         @user = User.new
+    end
+
+    def show
+        @user = User.find(params[:id])
     end
 
     def create
@@ -34,7 +38,7 @@ class UsersController < ApplicationController
 
     private
 
-    def verify_user_can_edit
+    def verify_user_can_view
         redirect_to posts_path unless current_user == User.find(params[:id])
     end
 
