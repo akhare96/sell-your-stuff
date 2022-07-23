@@ -1,3 +1,15 @@
+<br>
+<div class="container text-end">
+    <%if !current_user.posts.include?(@post) %>
+        <%if @favorite.nil? %>
+            <%= button_to "Favorite", favorites_path, params: {favorite: {post_id: @post.id}}, method: "post" %>
+        <% else %>
+            <%= button_to "Unfavorite", favorite_path(@favorite), method: "delete" %>
+        <% end %>
+    <%end%>
+    <br>
+    <p><%= @post.favorites.count %> favorite(s) for this post </p><br>
+</div>
 
 <div class="container text-center">
     <div class="fs-2">
@@ -91,10 +103,12 @@
 <div class="container">
     <br><br>
     <b> Contact Details: </b><br><br>
-    <b>Email:</b> <%= current_user.email if @post.show_email == true %><br>
-    <b>Phone:</b> <%= current_user.phone_number if @post.show_phone == true %><br>
+    <b>Posted by:</b> <%= @post.user.username %><br>
+    <b>Email:</b> <%= @post.user.email if @post.show_email == true %><br>
+    <b>Phone:</b> <%= @post.user.phone_number if @post.show_phone == true %><br>
     <b> Phone calls: </b> <%= @post.phone_calls == true ? "Yes" : "No"  %><br>
-    <b> Phone texts: </b> <%= @post.phone_texts == true ? "Yes" : "No"  %><br>
+    <b> Phone texts: </b> <%= @post.phone_texts == true ? "Yes" : "No"  %><br><br>
+    <p><%=link_to "View more posts from this user", user_posts_path(@post.user)%></p>
 </div>
 
 <br><br><br><br>
