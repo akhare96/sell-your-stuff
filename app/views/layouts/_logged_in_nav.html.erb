@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary">
+<nav class="navbar fixed-top navbar-expand-lg bg-primary">
 <div class="container-fluid">
   <a class="navbar-brand" style="color: white;" href="<%=posts_path%>">Sell-Your-Stuff</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,15 +7,18 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
-        <a class="nav-link active" style="color: white;" aria-current="page" href="<%=user_favorites_path%>">Favorites</a>
+        <a class="nav-link" style="color: white;" href="<%=user_path(current_user)%>">Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="color: white;" href="<%=user_path%>">Profile</a>
+        <a class="nav-link active" style="color: white;" aria-current="page" href="<%=user_favorites_path(current_user.id)%>">Favorites</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style="color: white;" href="<%=new_post_path%>"> New Post</a>
+        <a class="nav-link" style="color: white;" href="<%=new_user_post_path(current_user)%>"> New Post</a>
       </li>
     </ul>
+    <span class="navbar-text">
+      <%= link_to "Log Out", logout_path, class:"navbar-brand", method:"delete" %>
+    </span>
   </div>
 </div>
 </nav>
