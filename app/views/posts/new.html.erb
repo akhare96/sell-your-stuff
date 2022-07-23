@@ -1,6 +1,7 @@
 <br>
-<p> Enter your product details </p>
+
+<b><p class="fs-2 text-center"> Enter your item details </p></b>
 
 <%=render partial: "shared/errors", locals: {user_post_errors: @post} %>
 
-<%= render partial: "form" %>
+<%= render partial: "form", locals: {button: "Create"}%>

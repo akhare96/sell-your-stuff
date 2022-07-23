@@ -14,15 +14,15 @@
 
       <%= render partial: "shared/location", locals: {field: f, user_post: @user}%>
 
-      <%= f.label :password %><br>
+      <b><%= f.label :password %></b><br>
       <%= f.password_field :password %>
       <br><br>
 
-      <%= f.label :password_confirmation %><br>
+      <b><%= f.label :password_confirmation %></b><br>
       <%= f.password_field :password_confirmation %>
       <br><br>
 
-        <%= f.submit "create" %>
+      <%= f.submit "create Account" %>
 
     <% end %>
   </div>

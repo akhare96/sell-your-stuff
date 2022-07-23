@@ -1,13 +1,14 @@
-<p>Edit for <%=@user.username%></p>
 
-<%=render partial: "shared/errors", locals: {user_post_errors: @user} %>
+<b><p class="fs-2 text-center"> Edit account for <%=@user.username%> </p></b><br><br>
 
-<%= form_for @user do |f| %>
+<div class="container">
 
-    <%= render partial: "form", locals: {field: f}%>
-    
-    <%= render partial: "shared/location", locals: {field: f, user_post: @user}%>
+    <%=render partial: "shared/errors", locals: {user_post_errors: @user} %>
 
-<%= f.submit "Update" %>
+    <%= form_for @user do |f| %>
+        <%= render partial: "form", locals: {field: f}%>
+        <%= render partial: "shared/location", locals: {field: f, user_post: @user}%>
+    <%= f.submit "Update Account" %>
+    <% end %>
 
-<% end %>
+</div>
