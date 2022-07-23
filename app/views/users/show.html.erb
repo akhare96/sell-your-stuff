@@ -1,0 +1,15 @@
+
+<b><p class="fs-2 text-center"> <%=@user.username + "'s"%> profile </p></b><br><br>
+
+<div class="container fs-5">
+    <b>Username: </b><br><%= @user.username %><br><br>
+    <b>Email: </b><br><%= @user.email %><br><br>
+    <b>Phone: </b><br><%= @user.phone_number %><br><br>
+    <% if !@user.location %>
+        <b> No location set </b><br><br>
+    <% else %>
+        <b>Location: </b><br><%= (@user.location.state + ", " + @user.location.city) %><br><br>
+    <%end%>
+    <%= link_to "Edit Account", edit_user_path(@user), class:"btn btn-primary", method:"GET" %>
+</div>
+
