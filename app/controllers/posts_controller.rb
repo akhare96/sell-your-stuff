@@ -20,6 +20,14 @@ class PostsController < ApplicationController
             else
                 @posts = @user.posts
             end
+        elsif !params[:categories].blank?
+            @posts = Post.categories_filter(current_user, params[:categories])
+        elsif !params[:price].blank?
+            if params[:price] == "Low to High"
+              @posts = Post.low_to_high(current_user)
+            else
+              @posts = Post.high_to_low(current_user)
+            end
         end
     end
     
