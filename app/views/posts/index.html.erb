@@ -1,11 +1,12 @@
 <br><br>
 
-<% if !@user.location.nil? %>
+<% if logged_in? && !@user.location.nil? %>
     <b><p class="fs-2 text-center"> Showing posts from <%=@user.location.city + ", " + @user.location.state%> </p></b>
 <% else %>
     <b><p class="fs-2 text-center"> Showing all posts </p></b>
 <%end%><br>
 
+<% if logged_in? %>
 <div class="container">
     <button type="button" class="d-grid gap-2 col-2 mx-auto btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Change Location
@@ -37,6 +38,7 @@
         <%= submit_tag "Filter" %>
     <% end %>
 </div>
+<%end%>
 <br><br>
 
 

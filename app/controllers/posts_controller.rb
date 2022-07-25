@@ -3,10 +3,10 @@ class PostsController < ApplicationController
     before_action :verify_user_owns_post, only: [:edit, :update]
 
     def index
-        @user = current_user
+        logged_in? ? @user = current_user : @user = User.new
         @categories = Category.all
 
-        if !@user.location.nil?
+        if logged_in? && !@user.location.nil?
             @posts = Post.includes(:location).where(location: {state: current_user.location.state, city: current_user.location.city})
         else
             @posts = Post.all
