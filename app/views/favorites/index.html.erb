@@ -6,6 +6,7 @@
             <tr>
                 <th>Date Posted</th>
                 <th>Item Name</th>
+                <th>Condition</th>
                 <th>Price</th>
             </tr>
         </thead>
@@ -14,6 +15,7 @@
             <tr>
                 <td><%=date_created(favorite.post)%></td>
                 <td><%=link_to "#{favorite.post.name} - (#{favorite.post.location.city}, #{favorite.post.location.state})", user_post_path(favorite.post.id, favorite.post.id)%></td>
+                <td><%=favorite.post.condition%></td>
                 <td><%="$ #{favorite.post.price}"%></td>
             </tr>
             <%end %>

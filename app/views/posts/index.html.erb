@@ -1,11 +1,25 @@
 <br><br>
 
+
+
+<div class="text-center">
+  <h4>Filter posts:</h4><br>
+  <%= form_tag("/posts", method: "get") do %>
+    by <b>Category</b> <%= select_tag "categories", options_from_collection_for_select(@categories, "id", "name"), include_blank: true %>
+    or by <b>Price</b> <%= select_tag "price", options_for_select(["Low to High", "High to low"]), include_blank: true %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+<br><br>
+
+
 <div class="container">
     <table class="table">
         <thead>
             <tr>
                 <th>Date Posted</th>
                 <th>Item Name</th>
+                <th>Condition</th>
                 <th>Price</th>
             </tr>
         </thead>
@@ -14,6 +28,7 @@
             <tr>
                 <td><%=date_created(post)%></td>
                 <td><%=link_to "#{post.name} - (#{post.location.city}, #{post.location.state})", user_post_path(post.user.id, post.id)%></td>
+                <td><%=post.condition%></td>
                 <td><%="$ #{post.price}"%></td>
             </tr>
             <%end %>
