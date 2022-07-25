@@ -1,5 +1,6 @@
 <br>
 <div class="container text-end">
+<%if logged_in?%>
     <%if !current_user.posts.include?(@post) %>
         <%if @favorite.nil? %>
             <%= button_to "Favorite", favorites_path, params: {favorite: {post_id: @post.id}}, method: "post" %>
@@ -9,6 +10,7 @@
     <%end%>
     <br>
     <p><%= @post.favorites.count %> favorite(s) for this post </p><br>
+<%end%>
 </div>
 
 <div class="container text-center">
@@ -55,7 +57,7 @@
 
         <span class="border border-primary">
             <div class="col">
-                <b>Condition: </b><br><%= "$ #{@post.condition}" %><br>
+                <b>Condition: </b><br><%= "#{@post.condition}" %><br>
                 <br>
             </div>
         </span>
