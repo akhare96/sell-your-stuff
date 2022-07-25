@@ -49,7 +49,7 @@ class Post < ActiveRecord::Base
     end
       
     def self.low_to_high(user)
-        if !current_user.location.nil?
+        if !user.location.nil?
             includes(:location).where(location: {state: user.location.state, city: user.location.city}).order("price ASC")
         else
             order("price ASC")
@@ -60,7 +60,7 @@ class Post < ActiveRecord::Base
         if !current_user.location.nil?
             includes(:location).where(location: {state: current_user.location.state, city: current_user.location.city}).includes(:categories).where(categories: {id: category_id})
         else
-            includes(:categories).where(categories: {id: catefory_id})
+            includes(:categories).where(categories: {id: category_id})
         end
     end
 
