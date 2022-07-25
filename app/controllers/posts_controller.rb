@@ -57,10 +57,10 @@ class PostsController < ApplicationController
         params[:phone_texts] ? @post.phone_texts = true : @post.phone_texts = false
         params[:phone_calls] ? @post.phone_calls = true : @post.phone_calls = false
         if @post.save
-            flash[:valid_post] = "Successfully created post"
+            flash[:notice] = "Successfully created post"
             redirect_to post_path(@post)
         else
-            flash.now[:invalid_post] = "Post not saved"
+            flash.now[:alert] = "Post not saved"
             render :new
         end
     end
@@ -91,7 +91,8 @@ class PostsController < ApplicationController
     def purge_image
         image = ActiveStorage::Attachment.find(params[:id])
         image.purge
-        redirect_back fallback_location: root_path, notice: "success"
+        flash[:notice] = "Deleted Image"
+        redirect_back fallback_location: root_path
     end
 
     private

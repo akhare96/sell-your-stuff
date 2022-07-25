@@ -14,16 +14,16 @@ class SessionsController < ApplicationController
         u.password = SecureRandom.hex
       end
       set_session(@user)
-      flash[:success] = "Successfully logged in"
+      flash[:notice] = "Successfully logged in"
       redirect_to posts_path
     else 
       @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password])
         set_session(@user)
-        flash[:success] = "Successfully logged in"
+        flash[:notice] = "Successfully logged in"
         redirect_to posts_path
       else
-        flash[:failure] = "Failed to log in. Please check your credentials."
+        flash[:alert] = "Failed to log in. Please check your credentials."
         redirect_to login_path
       end
     end

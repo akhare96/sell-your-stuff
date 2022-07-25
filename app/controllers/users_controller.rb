@@ -15,10 +15,10 @@ class UsersController < ApplicationController
         @user = User.create(user_params)
         if @user.save
             set_session(@user)
-            flash[:valid_new] = "Account successfully created"
+            flash[:notice] = "Account successfully created"
             redirect_to posts_path
         else
-            flash.now[:invalid_new] = "Failed to create a new account"
+            flash.now[:alert] = "Failed to create a new account"
             render :new
         end
     end
