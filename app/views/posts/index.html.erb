@@ -1,14 +1,41 @@
 <br><br>
 
+<% if !@user.location.nil? %>
+    <b><p class="fs-2 text-center"> Showing posts from <%=@user.location.city + ", " + @user.location.state%> </p></b>
+<% else %>
+    <b><p class="fs-2 text-center"> Showing all posts </p></b>
+<%end%><br>
 
+<div class="container">
+    <button type="button" class="d-grid gap-2 col-2 mx-auto btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Change Location
+    </button>
+    <br><br>
 
-<div class="text-center">
-  <h4>Filter posts:</h4><br>
-  <%= form_tag("/posts", method: "get") do %>
-    by <b>Category</b> <%= select_tag "categories", options_from_collection_for_select(@categories, "id", "name"), include_blank: true %>
-    or by <b>Price</b> <%= select_tag "price", options_for_select(["Low to High", "High to low"]), include_blank: true %>
-    <%= submit_tag "Filter" %>
-  <% end %>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Your Location</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%= form_for @user do |f| %>
+                        <%= render partial: "shared/location", locals: {field: f, user_post: @user}%>
+                        <%= f.submit "Update Location" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+    <h4>Filter posts:</h4><br>
+    <%= form_tag("/posts", method: "get") do %>
+        by <b>Category</b> <%= select_tag "categories", options_from_collection_for_select(@categories, "id", "name"), include_blank: true %>
+        or by <b>Price</b> <%= select_tag "price", options_for_select(["Low to High", "High to low"]), include_blank: true %>
+        <%= submit_tag "Filter" %>
+    <% end %>
 </div>
 <br><br>
 
