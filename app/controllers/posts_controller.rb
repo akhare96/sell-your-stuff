@@ -3,10 +3,23 @@ class PostsController < ApplicationController
     before_action :verify_user_owns_post, only: [:edit, :update]
 
     def index
-        if params[:user_id]
-            @posts = User.find(params[:user_id]).posts
+        @user = current_user
+        @categories = Category.all
+
+        if !@user.location.nil?
+            @posts = Post.includes(:location).where(location: {state: current_user.location.state, city: current_user.location.city})
         else
             @posts = Post.all
+        end
+
+        if params[:user_id]
+            @user = User.find_by(id: params[:user_id])
+            if @user.nil?
+                flash[:notice] =  "user not found"
+                redirect_to posts_path
+            else
+                @posts = @user.posts
+            end
         end
     end
     
@@ -16,8 +29,17 @@ class PostsController < ApplicationController
     end
 
     def show
-        @post = Post.find(params[:id])
-        @favorite = current_user.favorites.find_by(post: @post.id)
+        if params[:user_id]
+            @user = User.find_by(id: params[:user_id])
+            @post = @user.posts.find_by(id: params[:id])
+            if @post.nil?
+                flash[:notice] =  "post not found"
+                redirect_to posts_path
+            end
+        else
+            @post = Post.find(params[:id])
+        end
+        @favorite = current_user.favorites.find_by(post: @post.id) if logged_in?
     end
 
     def create
@@ -67,7 +89,7 @@ class PostsController < ApplicationController
     private
 
     def verify_user_owns_post
-        redirect_to posts_path unless current_user.posts.include?(@post)
+        redirect_to posts_path unless current_user.posts.include?(Post.find(params[:id]))
     end
 
     def post_params
