@@ -56,4 +56,12 @@ class Post < ActiveRecord::Base
         end
     end
 
+    def self.categories_filter(current_user, category_id)
+        if !current_user.location.nil?
+            includes(:location).where(location: {state: current_user.location.state, city: current_user.location.city}).includes(:categories).where(categories: {id: category_id})
+        else
+            includes(:categories).where(categories: {id: catefory_id})
+        end
+    end
+
 end
