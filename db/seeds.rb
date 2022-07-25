@@ -20,6 +20,7 @@ categories = [
     "Pet Supplies",
     "Beauty",
     "Health",
+    "Fitness",
     "Toys",
     "Kids/Baby",
     "Handmade",
