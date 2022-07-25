@@ -26,11 +26,6 @@ class ApplicationController < ActionController::Base
         redirect_to root_path unless logged_in?
     end
 
-    def location_attributes=(location)
-        self.location = Location.find_or_create_by(state: location[:state], city: location[:city])
-        self.location.update(location)
-    end
-
     def date_created(post)
         post.created_at.strftime("%b %e, %Y")
     end

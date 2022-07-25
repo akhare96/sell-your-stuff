@@ -6,8 +6,7 @@ class Post < ActiveRecord::Base
     has_many :post_categories
     has_many :categories, through: :post_categories
     validates :name, :price, :description, :condition, :quantity, presence: true #:show_phone, :phone_calls, :phone_texts, :show_email
-    validates :images, attached: true,
-        content_type: 'image'
+    validates :images, attached: true
     accepts_nested_attributes_for :location, reject_if: :all_blank
 
     def self.conditions
@@ -33,5 +32,12 @@ class Post < ActiveRecord::Base
         end
         cities.reduce(:concat).uniq.sort
     end
-   
+
+    def location_attributes=(location)
+        if !(location[:state].empty? && location[:city].empty?)
+            self.location = Location.find_or_create_by(state: location[:state], city: location[:city])
+            self.location.update(location)
+        end
+    end
+
 end
