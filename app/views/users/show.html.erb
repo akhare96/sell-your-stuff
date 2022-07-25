@@ -2,17 +2,17 @@
 <b><p class="fs-2 text-center"> <%=@user.username + "'s"%> profile </p></b><br><br>
 
 <div class="container fs-5">
-    <% if @user.email.empty? %>
+    <% if @user.email.nil? || @user.email == "" %>
         <b> No email set </b><br><br>
     <% else %>
         <b>Email: </b><br><%= (@user.email) %><br><br>
     <%end%>
-    <% if @user.phone_number.empty? %>
+    <% if @user.phone_number.nil? || @user.phone_number == ""%>
         <b> No phone number set </b><br><br>
     <% else %>
         <b>Phone: </b><br><%= @user.phone_number %><br><br>
     <%end%>
-    <% if @user.location == nil %>
+    <% if @user.location.nil? %>
         <b> No location set </b><br><br>
     <% else %>
         <b>Location: </b><br><%= (@user.location.state + ", " + @user.location.city) %><br><br>

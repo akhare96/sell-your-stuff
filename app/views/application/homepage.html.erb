@@ -9,9 +9,9 @@
     <h5 class="card-text"><a href="<%=posts_path%>" style="text-decoration: none;">Continue as Guest</a></h5>
     <br>
     <h6> or </h6>
-    <form action='/auth/github' method='post'>
+    <form action='/auth/twitter2' method='post'>
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <button type="submit" class="btn btn-primary">Log in with GitHub</button>
+    <button type="submit" class="btn btn-primary">Log in with Twitter</button>
     </form>
   </div>
   <div class="card-footer text-muted">
