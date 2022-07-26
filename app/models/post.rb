@@ -40,25 +40,29 @@ class Post < ActiveRecord::Base
         end
     end
 
-    def self.high_to_low(user)
-        if !user.location.nil?
-            includes(:location).where(location: {state: user.location.state, city: user.location.city}).order("price DESC")
+    def self.user_with_location(user = nil)
+        includes(:location).where(location: {state: user.location.state, city: user.location.city})
+    end
+
+    def self.high_to_low(user = nil)
+        if !user.nil? && !user.location.nil?
+            self.user_with_location(user).order("price DESC")
         else
             order("price DESC")
         end
     end
       
-    def self.low_to_high(user)
-        if !user.location.nil?
-            includes(:location).where(location: {state: user.location.state, city: user.location.city}).order("price ASC")
+    def self.low_to_high(user = nil)
+        if !user.nil? && !user.location.nil?
+            self.user_with_location(user).order("price ASC")
         else
             order("price ASC")
         end
     end
 
-    def self.categories_filter(current_user, category_id)
-        if !current_user.location.nil?
-            includes(:location).where(location: {state: current_user.location.state, city: current_user.location.city}).includes(:categories).where(categories: {id: category_id})
+    def self.categories_filter(current_user = nil, category_id)
+        if !current_user.nil? && !current_user.location.nil?
+            self.user_with_location(current_user).includes(:categories).where(categories: {id: category_id})
         else
             includes(:categories).where(categories: {id: category_id})
         end

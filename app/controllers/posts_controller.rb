@@ -3,11 +3,11 @@ class PostsController < ApplicationController
     before_action :verify_user_owns_post, only: [:edit, :update]
 
     def index
-        logged_in? ? @user = current_user : @user = User.new
+        @user = current_user
         @categories = Category.all
 
         if logged_in? && !@user.location.nil?
-            @posts = Post.includes(:location).where(location: {state: current_user.location.state, city: current_user.location.city})
+            @posts = Post.user_with_location(@user)
         else
             @posts = Post.all
         end
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
         if params[:user_id]
             @user = User.find_by(id: params[:user_id])
             if @user.nil?
-                flash[:notice] =  "user not found"
+                flash[:alert] =  "user not found"
                 redirect_to posts_path
             else
                 @posts = @user.posts
@@ -39,15 +39,21 @@ class PostsController < ApplicationController
     def show
         if params[:user_id]
             @user = User.find_by(id: params[:user_id])
-            @post = @user.posts.find_by(id: params[:id])
+            @post = Post.find_by(id: params[:id])
             if @post.nil?
-                flash[:notice] =  "post not found"
+                flash[:alert] =  "post not found"
+                redirect_to posts_path
+            elsif @user.nil?
+                flash[:alert] =  "User not found"
+                redirect_to posts_path
+            elsif !@user.posts.include?(@post)
+                flash[:alert] = "Post does not belong to user"
                 redirect_to posts_path
             end
         else
             @post = Post.find(params[:id])
         end
-        @favorite = current_user.favorites.find_by(post: @post.id) if logged_in?
+        @favorite = current_user.favorites.find_by(post: @post) if logged_in?
     end
 
     def create

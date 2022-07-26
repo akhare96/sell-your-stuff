@@ -6,8 +6,8 @@
     <b><p class="fs-2 text-center"> Showing all posts </p></b>
 <%end%><br>
 
-<% if logged_in? %>
 <div class="container">
+<% if logged_in? %>
     <button type="button" class="d-grid gap-2 col-2 mx-auto btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Change Location
     </button>
@@ -29,6 +29,7 @@
             </div>
         </div>
     </div>
+<%end%>
 
     <div class="text-center">
     <h4>Filter posts:</h4><br>
@@ -38,7 +39,6 @@
         <%= submit_tag "Filter" %>
     <% end %>
 </div>
-<%end%>
 <br><br>
 
 
