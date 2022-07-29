@@ -1,6 +1,6 @@
 <br>
 <b><p class="fs-2 text-center"> Edit your post for item: <%=@post.name%> </p></b>
 
-<%=render partial: "shared/errors", locals: {user_post_errors: @post} %>
+<%=render partial: "shared/errors", locals: {user_post_errors: @post, message: "preventing this post from being saved"} %>
 
 <%= render partial: "form", locals: {button: "Update"} %>

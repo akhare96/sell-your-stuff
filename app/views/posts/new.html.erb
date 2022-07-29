@@ -2,6 +2,6 @@
 
 <b><p class="fs-2 text-center"> Enter your item details </p></b>
 
-<%=render partial: "shared/errors", locals: {user_post_errors: @post} %>
+<%=render partial: "shared/errors", locals: {user_post_errors: @post, message: "preventing this post from being created"} %>
 
 <%= render partial: "form", locals: {button: "Create"}%>

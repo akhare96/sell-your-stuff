@@ -2,7 +2,7 @@
 <% if user_post_errors.errors.any? %>
     <h3>
         <%= pluralize(user_post_errors.errors.count, "error") %>
-        preventing this post from being saved:
+        <%=message%>:
     </h3>
     <ol>
         <% user_post_errors.errors.full_messages.each do |msg| %>

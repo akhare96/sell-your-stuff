@@ -3,7 +3,7 @@
 
 <div class="container">
 
-    <%=render partial: "shared/errors", locals: {user_post_errors: @user} %>
+    <%=render partial: "shared/errors", locals: {user_post_errors: @user, message: "prevnting profile from being updated"} %>
 
     <%= form_for @user do |f| %>
         <%= render partial: "form", locals: {field: f}%>

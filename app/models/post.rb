@@ -42,6 +42,7 @@ class Post < ActiveRecord::Base
 
     def self.user_with_location(user = nil)
         includes(:location).where(location: {state: user.location.state, city: user.location.city})
+        #returns active record relation object vs array with native ruby code
     end
 
     def self.high_to_low(user = nil)

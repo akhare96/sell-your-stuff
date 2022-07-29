@@ -1,13 +1,15 @@
 <br><br>
 
-<% if logged_in? && !@user.location.nil? %>
+<% if logged_in? && !@user.location.nil? && !params[:user_id]%>
     <b><p class="fs-2 text-center"> Showing posts from <%=@user.location.city + ", " + @user.location.state%> </p></b>
+<% elsif logged_in? && params[:user_id]%>
+    <b><p class="fs-2 text-center"> Showing posts from <%=@user.username%> </p></b>
 <% else %>
     <b><p class="fs-2 text-center"> Showing all posts </p></b>
 <%end%><br>
 
 <div class="container">
-<% if logged_in? %>
+<% if logged_in? && !params[:user_id]%>
     <button type="button" class="d-grid gap-2 col-2 mx-auto btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Change Location
     </button>
@@ -31,6 +33,7 @@
     </div>
 <%end%>
 
+<% if !params[:user_id]%>
     <div class="text-center">
     <h4>Filter posts:</h4><br>
     <%= form_tag("/posts", method: "get") do %>
@@ -38,6 +41,7 @@
         or by <b>Price</b> <%= select_tag "price", options_for_select(["Low to High", "High to low"]), include_blank: true %>
         <%= submit_tag "Filter" %>
     <% end %>
+<% end %>
 </div>
 <br><br>
 

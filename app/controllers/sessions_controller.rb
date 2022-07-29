@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    #user logs in -> redireted to /auth/twitter2 -> redirect to twitter sign in -> authorize -> redirect to /auth/twitter2/callback -> target webpage
     if !auth.nil?
       twitter_nickname = auth['info']['nickname']
       twitter_email = auth['info']['email']
@@ -18,7 +19,7 @@ class SessionsController < ApplicationController
       redirect_to posts_path
     else 
       @user = User.find_by(username: params[:username])
-      if @user && @user.authenticate(params[:password])
+      if @user && @user.authenticate(params[:password]) #user.try(:authenticate, params[:password]) - object.try(:some_method) = if object != nil then object.some_method else nil end
         set_session(@user)
         flash[:notice] = "Successfully logged in"
         redirect_to posts_path
