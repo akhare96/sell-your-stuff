@@ -1,3 +1,4 @@
+<!-- form_tag form_for form_with -->
 <br>
 <%= form_for @post do |f| %>
 
@@ -61,9 +62,13 @@
       </div>
 
       <div class="col">
-        <div "form-check">
+          <div class="form-check">
           <b><%= f.label :categories %><br></b>
-          <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+          <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name)  do |b|%>
+            <%= b.label class:"label-checkbox" do%>
+              <%=b.check_box + " " + b.text%>
+            <%end%>
+          <%end%>
           <br><br>
         </div>
       </div>
@@ -88,15 +93,20 @@
   </div>
 
   <div class="container form-check form-switch">
-    <b> Contact Details </b><br><br>
-    <label class="form-check-label" for="show_email">Display email to public</label>
-    <input class="form-check-input" type="checkbox" role="switch" name="show_email" value="true" id="show_email"><br>
-    <label class="form-check-label" for="show_phone">Display phone number to public</label>
-    <input class="form-check-input" type="checkbox" role="switch" name="show_phone" value="true" id="show_phone"><br>
-    <label class="form-check-label" for="phone_calls">Phone calls</label>
-    <input class="form-check-input" type="checkbox" role="switch" name="phone_calls" value="true" id="phone_calls"><br>
-    <label class="form-check-label" for="phone_texts">Phone texts</label>
-    <input class="form-check-input" type="checkbox" role="switch" name="phone_texts" value="true" id="phone_texts"><br>
+    <%= f.label "Display email to public" %>
+    <%= f.check_box :show_email, class: "form-check-input" %>
+  </div>
+  <div class="container form-check form-switch">
+    <%= f.label "Display phone number to public" %>
+    <%= f.check_box :show_phone, class: "form-check-input" %>
+  </div>
+  <div class="container form-check form-switch">
+    <%= f.label "Phone calls" %>
+    <%= f.check_box :phone_calls, class: "form-check-input" %>
+  </div>
+  <div class="container form-check form-switch">
+    <%= f.label "Phone texts" %>
+    <%= f.check_box :phone_texts, class: "form-check-input" %>
   </div>
 
   <div class="d-grid gap-2 col-1 mx-auto">
@@ -105,3 +115,11 @@
 
 <% end %>
 <br><br><br><br>
+
+
+<%# <%=f.select :show_email, [['None', false], ['Yes', true]]%>
+<%# <%=f.select :show_phone, [['None', false], ['Yes', true]]%>
+<%# <%=f.select :phone_calls, [['None', false], ['Yes', true]]%>
+<%# <%=f.select :phone_texts, [['None', false], ['Yes', true]]%>
+
+<%# <input  class="form-check-input" id="post_show_email" name="post[show_email]" type="checkbox" value="1" /><input name="post[show_email]" type="hidden" value="0" /> %>

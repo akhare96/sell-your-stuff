@@ -5,14 +5,8 @@ class PostsController < ApplicationController
     def index
         @user = current_user
         @categories = Category.all
-
-        if logged_in? && !@user.location.nil?
-            @posts = Post.user_with_location(@user)
-        else
-            @posts = Post.all
-        end
-
-        if params[:user_id]
+        
+        if params[:user_id] #if statement for nested resource - all posts from a specific user
             @user = User.find_by(id: params[:user_id])
             if @user.nil?
                 flash[:alert] =  "user not found"
@@ -20,14 +14,18 @@ class PostsController < ApplicationController
             else
                 @posts = @user.posts
             end
-        elsif !params[:categories].blank?
-            @posts = Post.categories_filter(current_user, params[:categories])
+        elsif !params[:categories].blank? #if statements for filtering posts
+            @posts = Post.categories_filter(@user, params[:categories])
         elsif !params[:price].blank?
             if params[:price] == "Low to High"
-              @posts = Post.low_to_high(current_user)
+              @posts = Post.low_to_high(@user)
             else
-              @posts = Post.high_to_low(current_user)
+              @posts = Post.high_to_low(@user)
             end
+        elsif logged_in? && !@user.location.nil? #when user logs in, @posts will be all posts from location if set
+            @posts = Post.user_with_location(@user)
+        else
+            @posts = Post.all
         end
     end
     
@@ -40,7 +38,7 @@ class PostsController < ApplicationController
         if params[:user_id]
             @user = User.find_by(id: params[:user_id])
             @post = Post.find_by(id: params[:id])
-            if @post.nil?
+            if @post.nil? #if statement for when user enters non-existing user or post id in URL
                 flash[:alert] =  "post not found"
                 redirect_to posts_path
             elsif @user.nil?
@@ -53,15 +51,11 @@ class PostsController < ApplicationController
         else
             @post = Post.find(params[:id])
         end
-        @favorite = current_user.favorites.find_by(post: @post) if logged_in?
+        @favorite = current_user.favorites.find_by(post: @post) if logged_in? #see if @post belongs to user to determine whether to display 'favorite' or 'unfavorite'
     end
 
     def create
         @post = Post.new(post_params)
-        params[:show_email] ? @post.show_email = true : @post.show_email = false
-        params[:show_phone] ? @post.show_phone = true : @post.show_phone = false
-        params[:phone_texts] ? @post.phone_texts = true : @post.phone_texts = false
-        params[:phone_calls] ? @post.phone_calls = true : @post.phone_calls = false
         if @post.save
             flash[:notice] = "Successfully created post"
             redirect_to post_path(@post)
@@ -77,10 +71,6 @@ class PostsController < ApplicationController
 
     def update
         @post = Post.find(params[:id])
-        params[:show_email] ? @post.show_email = true : @post.show_email = false
-        params[:show_phone] ? @post.show_phone = true : @post.show_phone = false
-        params[:phone_texts] ? @post.phone_texts = true : @post.phone_texts = false
-        params[:phone_calls] ? @post.phone_calls = true : @post.phone_calls = false
         if @post.update(post_params)
             redirect_to post_path(@post)
         else
